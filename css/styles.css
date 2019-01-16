@@ -165,3 +165,16 @@ svg {
 #calculadora-hcode {
   margin: 0 auto;
 }
+
+#toggle-audio {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  height: 6%;
+  opacity: 0.5;
+}
+
+#toggle-audio:hover {
+  cursor: pointer;
+  opacity: 0.8;
+}
