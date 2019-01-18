@@ -54,11 +54,46 @@ class Calculator {
     // Validar se foi passado parâmetro
     value = value || this.lastNumber.toString()
 
+    // Tratar valor se ele for numérico
+    if (!isNaN(value)) {
+
+      // Converter valor em 'string'
+      value = value.toString()
+
+      // Verificar se o valor é numérico e ajustar separador decimal
+      value = this.addDecimalSep(value)
+
+      // Salvar propriedades do valor
+      const integerLen = value.indexOf(DECIMAL_SEP)
+      const decimalLen = value.substr(integerLen + 1, MAX_LENGTH - integerLen).length
+
+      // Retornar erro se número de casas inteiras forem superior ao máximo
+      if (integerLen > MAX_LENGTH) {
+        this.throwError(ErrorMsg.OVERFLOW)
+        return
+
+      // Arredondar casas decimais para caber na tela
+      } else if (decimalLen >= 0) {
+
+        //value = Math.round(parseFloat(value) * Math.pow(10, decimalLen)) / Math.pow(10, decimalLen)
+        value = parseFloat(parseFloat(value).toFixed(decimalLen))
+      }
+
+      // Verificar se o valor é numérico e ajustar separador decimal
+      value = this.addDecimalSep(value)
+    }
+
+    // Exibir valor na tela
+    this.display = value
+  }
+
+  addDecimalSep(value) {
+    
     // Verificar se o valor é numérico e ajustar separador decimal
-    if (!isNaN(value) && !this.hasDecimals(value)) {
+    if (!this.hasDecimals(value)) {
       value = value + DECIMAL_SEP
     }
-    this.display = value
+    return value
   }
 
   hasDecimals(string) {
@@ -136,6 +171,7 @@ class Calculator {
       // Chamar botão equivalente (ver constante 'KEYS_MAP')
       const key = event.key.toLowerCase()
       if (event.ctrlKey && key == 'c') {
+        self.playAudio()
         self.copyFromDisplay()
       } else {
         self.pressButton(KEYS_MAP[key])
@@ -150,7 +186,9 @@ class Calculator {
       if (isNaN(content)) {
         alert(`Você está tentando colar conteúdo que não é numérico:\n"${content}"`)
       } else {
-        self.display = parseFloat(content)
+        self.playAudio()
+        self.captureOperation(content)
+        self.refreshDisplay()
         console.log('Conteúdo colado com sucesso!')
       }
     })
@@ -201,7 +239,6 @@ class Calculator {
       // Registrar ultimo botão pressionado e atualizar display
       this._lastButtonPressed = BUTTONS_MAP[buttonText]
       this.refreshDisplay()
-      console.log(this._lastButtonPressed + ' = [' + this._operationElements + ']') /////
     }
   }
 
@@ -241,7 +278,7 @@ class Calculator {
       return
     }
 
-    // Declarar variável para avaliar se a operação realizará divisão por 0 (zero)
+    // Declarar função para avaliar se a operação realizará divisão por 0 (zero)
     const isDividingByZero = () => {
       if (this._operationElements[1] == '/' && this._operationElements[2] == 0) {
         this._operationElements = [0]
@@ -252,7 +289,7 @@ class Calculator {
     }
 
     // Avaliar se trata-se de repetição da última operação
-    if (this._lastButtonPressed == '=' && operation == '=') {
+    if (OP_TRIGGERS.indexOf(this._lastButtonPressed) > -1 && operation == '=') {
       this.pushOperation(this._lastOperator)
       this.pushOperation(this._lastOperated)
     }
@@ -288,28 +325,25 @@ class Calculator {
           return
         }
 
-        // Salvar últimas operações
-        this._lastOperator = this._operationElements[1] 
-        this._lastOperated = this._operationElements[2]
-
         // Para '%' (porcento), avaliar o operador aritmético e realizar o cálculo pertinente
         if (operation == '%') {
           
           // Se for adição ou subtração, realizar o acrécimo/decrécimo proporcional do primeiro valor
           if (ADD_SUB.indexOf(this._operationElements[1]) > -1) {
-            result = eval(`${this._operationElements.join('')}*${this._operationElements[0]}/100`)
+            this._operationElements[2] = this._operationElements[0] * this._operationElements[2] / 100
           
           // Se for multiplicação ou divisão, dividir segundo número por cem
           } else {
-            result = eval(`${this._operationElements.join('')}/100`)
+            this._operationElements[2] = this._operationElements[2] / 100
           }
-
-        // Para '=' (igual), realizar o cálculo
-        } else if (operation == '=') {
-          
-          // Fazer o parse dos itens do array e executar cálculo
-          result = eval(this._operationElements.join(''))
         }
+
+        // Salvar últimas operações
+        this._lastOperator = this._operationElements[1] 
+        this._lastOperated = this._operationElements[2]
+
+        // Fazer o parse dos dos elementos da operação e executar cálculo
+        result = eval(this._operationElements.join(''))
     }
     
     // Salvar resultado como elemento de operações
@@ -426,23 +460,6 @@ class Calculator {
   }
 
   set display(value) {
-    
-    // Converter valor em 'string'
-    value = value.toString()
-
-    // Salvar propriedades do valor
-    const integerLen = value.indexOf(DECIMAL_SEP)
-    const decimalLen = value.substr(integerLen + 1, MAX_LENGTH - integerLen).length
-
-    // Retornar erro se número de casas inteiras forem superior ao máximo
-    if (integerLen > MAX_LENGTH) {
-      this.throwError(ErrorMsg.OVERFLOW)
-      return
-
-    // Arredondar casas decimais para caber na tela
-    } else if (decimalLen >= 0) {
-      value = parseFloat(value).toFixed(decimalLen)
-    }
 
     // Inserir valor no elemento HTML
     this._display.innerHTML = value

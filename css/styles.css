@@ -1,3 +1,9 @@
+
+@font-face {
+  font-family: 'Digital-7';
+  src: url('./../assets/fonts/digital-7.ttf');
+}
+
 button, hr, input {
   overflow: visible
 }
@@ -151,11 +157,6 @@ summary {
   display: table-cell;
   vertical-align: middle;
   text-align: center;
-}
-
-@font-face {
-  font-family: 'Digital-7';
-  src: url('./../assets/fonts/digital-7.ttf');
 }
 
 svg {

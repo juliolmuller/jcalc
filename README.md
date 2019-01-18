@@ -1,11 +1,15 @@
 # jCalc 1.0
 
- Todavia, apenas o banco *CoreAdmin* está implementado na versão atual. Assim, temos a seguinte estrutura para o banco de dados:
- ![Diagrama Relacional de 'PHMoney_CoreAdmin'](./assets/images/app-overview.jpg)
+![Diagrama Relacional de 'PHMoney_CoreAdmin'](./assets/images/app-overview.jpg)
 
-[![Hcode Treinamentos](https://www.hcode.com.br/res/img/hcode-200x100.png)](https://www.hcode.com.br)
+### Overview
 
-Calculadora desenvolvida como exemplo do Curso Completo de JavaScript na Udemy.com.
+Application develop to work as a fullt functional pocket calculator. It is part of my personal portfolio of JavaScript projects.
 
-### Projeto
-![Calculadora](https://firebasestorage.googleapis.com/v0/b/hcode-com-br.appspot.com/o/calculadora-hcode.jpg?alt=media&token=5406aa3f-b965-401c-9b4e-654609c78b33)
+### Resources
+
+- Tradi
+
+### Credits
+- **HTML & CSS:** [Hcode Treinamentos](https://www.hcode.com.br)
+- **JavaScript:** [Julio Muller](https://www.linkedin.com/in/juliolmuller/)
