@@ -1,12 +1,22 @@
-# jCalc 1.0
+# jCalc
 
-![Diagrama Relacional de 'PHMoney_CoreAdmin'](./assets/images/app-overview.jpg)
+- **JavaScript developed by:** [Julio L. Muller](https://www.linkedin.com/in/juliolmuller/)
+- **HTML & CSS delivered by:** [Hcode Treinamentos](https://www.hcode.com.br)
+- **Release date:** Jan 17, 2019
+- **Latest version:** 1.0.0
+- **License:** *FREE*
 
-### Overview
+## Overview
 
 Application develop to work as a fullt functional pocket calculator. It is part of my personal portfolio of JavaScript projects.
 
-### Resources
+![Diagrama Relacional de 'PHMoney_CoreAdmin'](./assets/images/app-overview.jpg)
+
+## Run Application
+
+Take a look at this application running through [this link](http://htmlpreview.github.io/?https://github.com/juliolmuller/jCalc/blob/master/index.html).
+
+## Resources
 
 - Traditional calculations with `+`, `-`, `*`, `/` and also `%`;
 - Continuous calculations by pressing `=` repeatedly;
@@ -22,7 +32,3 @@ Application develop to work as a fullt functional pocket calculator. It is part 
   - `Backspace` to CE (clear current entry)
   - `Escape` to AC (clear all operation)
 - Copy (`Ctrl+C`) & Paste (`Ctrl+V`) support;
-
-### Credits
-- **HTML & CSS:** [Hcode Treinamentos](https://www.hcode.com.br)
-- **JavaScript:** [Julio Muller](https://www.linkedin.com/in/juliolmuller/)
