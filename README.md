@@ -8,7 +8,7 @@
 
 ## Overview
 
-Application develop to work as a fullt functional pocket calculator. It is part of my personal portfolio of JavaScript projects.
+Application developed to work as a fully functional pocket calculator. It is part of my personal portfolio of JavaScript projects.
 
 ![Diagrama Relacional de 'PHMoney_CoreAdmin'](./assets/images/app-overview.jpg)
 
