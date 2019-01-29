@@ -1,8 +1,10 @@
+
 # jCalc
 
 - **JavaScript developed by:** [Julio L. Muller](https://www.linkedin.com/in/juliolmuller/)
 - **HTML & CSS delivered by:** [Hcode Treinamentos](https://www.hcode.com.br)
-- **Release date:** Jan 17, 2019
+- **Released on:** Jan 17, 2019
+- **Updated on:** Jan 17, 2019
 - **Latest version:** 1.0.0
 - **License:** *FREE*
 
