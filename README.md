@@ -1,7 +1,7 @@
 
 # jCalc
 
-- **JavaScript developed by:** [Julio L. Muller](https://www.linkedin.com/in/juliolmuller/)
+- **JavaScript developed by:** [Julio L. Muller](https://www.jjsolutions.net/)
 - **HTML & CSS delivered by:** [Hcode Treinamentos](https://www.hcode.com.br)
 - **Released on:** Jan 17, 2019
 - **Updated on:** Jan 17, 2019
@@ -16,7 +16,7 @@ Application developed to work as a fully functional pocket calculator. It is par
 
 ## Run Application
 
-Take a look at this application running through [this link](http://htmlpreview.github.io/?https://github.com/juliolmuller/jCalc/blob/master/index.html).
+Take a look at this application running through [this link](http://www.jcalc.portfolio.jjsolutions.net).
 
 ## Resources
 
