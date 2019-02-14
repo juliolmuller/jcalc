@@ -16,7 +16,7 @@ Application developed to work as a fully functional pocket calculator. It is par
 
 ## Run Application
 
-Take a look at this application running through [this link](http://www.jcalc.portfolio.jjsolutions.net).
+Take a look at this application running through [this link](http://jcalc.jjsolutions.net/).
 
 ## Resources
 
