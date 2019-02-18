@@ -5,7 +5,7 @@ const DECIMAL_SEP = '.'
 const MAX_LENGTH = 10
 const ErrorMsg = {
   GENERAL: '#ERROR#',
-  DIV_0: '#DIV 0',
+  DIV_0: '#DIV 0#',
   OVERFLOW: '#OVERFLOW#'
 }
 const ADD_SUB = ['+', '-']

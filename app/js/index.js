@@ -1,3 +1,3 @@
 
 // Instanciar objeto global 'CalculatorController'
-window.calc = new Calculator()
+window.calculator = new Calculator()
