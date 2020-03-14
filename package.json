@@ -13,8 +13,8 @@
     "url": "https://github.com/juliolmuller/jcalc"
   },
   "scripts": {
-    "dev": "gulp",
-    "production": "gulp --production"
+    "watch": "gulp",
+    "build": "gulp --production"
   },
   "devDependencies": {
     "@babel/core": "7.*",
