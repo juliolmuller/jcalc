@@ -19,6 +19,12 @@
     "watch": "parcel watch src/index.html -d docs/"
   },
   "devDependencies": {
+    "eslint": "6.*",
+    "eslint-config-standard": "14.*",
+    "eslint-plugin-import": "2.*",
+    "eslint-plugin-node": "11.*",
+    "eslint-plugin-promise": "4.*",
+    "eslint-plugin-standard": "4.*",
     "parcel-bundler": "1.*"
   }
 }
