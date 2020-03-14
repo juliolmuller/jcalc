@@ -1,4 +1,3 @@
-// Importar recursos do 'gulp'
 const gulp = require('gulp');
 const concat = require('gulp-concat');
 const htmlmin = require('gulp-htmlmin');
@@ -10,7 +9,7 @@ const del = require('del');
 // Definir tarefa 'pages'
 gulp.task('pages', () => {
   return gulp
-    .src('app/**/*.html')              // Selecionar todos os arquivos HTML
+    .src('src/**/*.html')              // Selecionar todos os arquivos HTML
     .pipe(
       htmlmin({                        // Minificar arquivos HTML
         collapseWhitespace: true,      // Remover quebra de linhas e espaços em branco em excesso
@@ -25,7 +24,7 @@ gulp.task('pages', () => {
 // Definir tarefa 'styles'
 gulp.task('styles', () => {
   return gulp
-    .src('app/**/*.css')               // Selecionar todos os arquivos CSS
+    .src('src/**/*.css')               // Selecionar todos os arquivos CSS
     .pipe(cleanCSS())                  // Minificar arquivos CSS
     .pipe(concat('styles.min.css'))    // Concatenar multiplos arquivos em um único
     .pipe(gulp.dest('docs/css'));      // Salvar arquivo gerado na pasta 'docs'
@@ -34,7 +33,7 @@ gulp.task('styles', () => {
 // Definir tarefa 'scripts'
 gulp.task('scripts', () => {
   return gulp
-    .src('app/**/*.js')                // Selecionar todos os arquivos JavaScript
+    .src('src/**/*.js')                // Selecionar todos os arquivos JavaScript
     .pipe(
       babel({                          // Transpilar JavaScript para melhorar compatibilidade para browsers antigos
         presets: ['@babel/env']
@@ -48,7 +47,7 @@ gulp.task('scripts', () => {
 // Definir tarefa 'assets'
 gulp.task('assets', () => {
   return gulp
-    .src('app/assets/**/*.*')          // Selecionar todos os demais tipos de arquivos
+    .src('src/assets/**/*.*')          // Selecionar todos os demais tipos de arquivos
     .pipe(gulp.dest('docs/assets'));   // e copiá-los para a pasta 'docs'
 });
 
