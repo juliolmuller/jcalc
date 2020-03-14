@@ -1,7 +1,7 @@
 {
   "name": "jcalc",
   "author": "Julio L. Muller",
-  "version": "1.1.2",
+  "version": "1.1.3",
   "description": "Provides development tools to minify and uglify codes and transpile JavaScript to mantain compatibility with old browsers.",
   "keywords": [
     "julio muller",
@@ -23,7 +23,7 @@
     "gulp": "4.*",
     "gulp-babel": "8.*",
     "gulp-clean-css": "4.*",
-    "gulp-concat": "~2.6.1",
+    "gulp-concat": "2.*",
     "gulp-htmlmin": "5.*",
     "gulp-uglify": "3.*"
   }
