@@ -4,15 +4,15 @@
 - **JavaScript developed by:** [Julio L. Muller](https://github.com/juliolmuller)
 - **HTML & CSS delivered by:** [Hcode Treinamentos](https://www.hcode.com.br)
 - **Released on:** Jan 17, 2019
-- **Updated on:** Sep 3, 2019
-- **Latest version:** 1.1.2
+- **Updated on:** Mar 14, 2020
+- **Latest version:** 1.1.4
 - **License:** MIT
 
 ## Overview
 
 Application developed to work as a fully functional pocket calculator. It is part of my personal portfolio of JavaScript projects.
 
-![Application Overview](./app-overview.jpg)
+![Application Overview](./src/assets/images/app-overview.jpg)
 
 ## Run Application
 
