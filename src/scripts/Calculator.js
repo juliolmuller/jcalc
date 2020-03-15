@@ -1,5 +1,9 @@
+import opt from './constants'
+import clickAudio from '../assets/audio/click.mp3'
+import soundOnIcon from '../assets/images/sound-on.png'
+import soundOffIcon from '../assets/images/sound-off.png'
 
-class Calculator {
+export default class Calculator {
 
   constructor() {
 
@@ -11,7 +15,7 @@ class Calculator {
     this._withAudio = true
 
     // Configurar som de clique
-    this._audio = new Audio('./assets/click.mp3')
+    this._audio = new Audio(clickAudio)
 
     // Executar método de inicialização da aplicação
     this.initialize()
@@ -28,12 +32,12 @@ class Calculator {
     const self = this
 
     // Exibir conteúdo inicial no display
-    self.refreshDateTime()      // Data e hora atuais
-    self.refreshDisplay()       // '0' (zero)
+    self.refreshDateTime()
+    self.refreshDisplay()
 
     // Executar 'refresh' do relógio
     setInterval(function() {
-      self.refreshDateTime()    
+      self.refreshDateTime()
     }, 1000)
 
     // Configurar eventos de clique e teclado
@@ -45,8 +49,8 @@ class Calculator {
   refreshDateTime() {
 
     // Chamar data e hora atuais e formatá-las
-    this.displayTime = this.currentDate.toLocaleTimeString(LOCALE)
-    this.displayDate = this.currentDate.toLocaleDateString(LOCALE, { day: '2-digit', month: 'long', year: 'numeric' })
+    this.displayTime = this.currentDate.toLocaleTimeString(opt.LOCALE)
+    this.displayDate = this.currentDate.toLocaleDateString(opt.LOCALE, { day: '2-digit', month: 'long', year: 'numeric' })
   }
 
   refreshDisplay(value = undefined) {
@@ -64,18 +68,17 @@ class Calculator {
       value = this.addDecimalSep(value)
 
       // Salvar propriedades do valor
-      const integerLen = value.indexOf(DECIMAL_SEP)
-      const decimalLen = value.substr(integerLen + 1, MAX_LENGTH - integerLen).length
+      const integerLen = value.indexOf(opt.DECIMAL_SEP)
+      const decimalLen = value.substr(integerLen + 1, opt.MAX_LENGTH - integerLen).length
 
       // Retornar erro se número de casas inteiras forem superior ao máximo
-      if (integerLen > MAX_LENGTH) {
-        this.throwError(ErrorMsg.OVERFLOW)
+      if (integerLen > opt.MAX_LENGTH) {
+        this.throwError(opt.ErrorMsg.OVERFLOW)
         return
 
       // Arredondar casas decimais para caber na tela
       } else if (decimalLen >= 0) {
 
-        //value = Math.round(parseFloat(value) * Math.pow(10, decimalLen)) / Math.pow(10, decimalLen)
         value = parseFloat(parseFloat(value).toFixed(decimalLen))
       }
 
@@ -88,10 +91,10 @@ class Calculator {
   }
 
   addDecimalSep(value) {
-    
+
     // Verificar se o valor é numérico e ajustar separador decimal
     if (!this.hasDecimals(value)) {
-      value = value + DECIMAL_SEP
+      value = value + opt.DECIMAL_SEP
     }
     return value
   }
@@ -99,7 +102,7 @@ class Calculator {
   hasDecimals(string) {
 
     // Contar o número de separadores decimais do parâmetro
-    return (string.toString().indexOf(DECIMAL_SEP) > -1)
+    return (string.toString().indexOf(opt.DECIMAL_SEP) > -1)
   }
 
   initAudioEvent() {
@@ -115,9 +118,9 @@ class Calculator {
       // Alternar ícone de som
       if (self._withAudio) {
         self.playAudio()
-        img.src = './assets/images/sound-on.png'
+        img.src = soundOnIcon
       } else {
-        img.src = './assets/images/sound-off.png'
+        img.src = soundOffIcon
       }
     })
   }
@@ -135,10 +138,10 @@ class Calculator {
 
       // Iterar sobre os elementos, configurando o evento
       buttons.forEach(button => {
-        
+
         // Definir evento para cliques simples e longos
         button.addEventListener(event, function() {
-          
+
           // Retornar valor de elemento clicado
           const textButton = button.className.baseVal.replace('btn-', '')
           self.pressButton(textButton)
@@ -170,11 +173,11 @@ class Calculator {
 
       // Chamar botão equivalente (ver constante 'KEYS_MAP')
       const key = event.key.toLowerCase()
-      if (event.ctrlKey && key == 'c') {
+      if (event.ctrlKey && key === 'c') {
         self.playAudio()
         self.copyFromDisplay()
       } else {
-        self.pressButton(KEYS_MAP[key])
+        self.pressButton(opt.KEYS_MAP[key])
       }
     })
 
@@ -199,7 +202,7 @@ class Calculator {
     // Criar um elemento HTML para armazenar o valor do display
     const input = document.createElement('input')
     document.body.appendChild(input)
-    
+
     // Copiar conteúdo do display para o 'input'
     input.value = parseFloat(this.display)
 
@@ -215,8 +218,8 @@ class Calculator {
   pressButton(buttonText) {
 
     // Verificar se foi pressionada uma tecla válida
-    if (buttonText in BUTTONS_MAP) {
-      
+    if (buttonText in opt.BUTTONS_MAP) {
+
       // Executar son de clique (se ativado)
       this.playAudio()
 
@@ -230,14 +233,14 @@ class Calculator {
           break
         case 'igual':
         case 'porcento':
-          this.calculate(BUTTONS_MAP[buttonText])
+          this.calculate(opt.BUTTONS_MAP[buttonText])
           break
         default:
-          this.captureOperation(BUTTONS_MAP[buttonText])
+          this.captureOperation(opt.BUTTONS_MAP[buttonText])
       }
 
       // Registrar ultimo botão pressionado e atualizar display
-      this._lastButtonPressed = BUTTONS_MAP[buttonText]
+      this._lastButtonPressed = opt.BUTTONS_MAP[buttonText]
       this.refreshDisplay()
     }
   }
@@ -264,88 +267,75 @@ class Calculator {
   clearEntry() {
 
     // Apaga o último registro de operações
-    if (this._operationElements.length == 1) {
+    if (this._operationElements.length === 1) {
       this.clearAll()
-    } else if (this._operationElements.length == 3) {
+    } else if (this._operationElements.length === 3) {
       this._operationElements[2] = 0
     }
   }
-  
+
   calculate(operation) {
 
     // Verificar se parâmetro contém valor aceitável
-    if (OP_TRIGGERS.indexOf(operation) == -1) {
+    if (opt.OP_TRIGGERS.indexOf(operation) === -1) {
       return
     }
 
     // Declarar função para avaliar se a operação realizará divisão por 0 (zero)
     const isDividingByZero = () => {
-      if (this._operationElements[1] == '/' && this._operationElements[2] == 0) {
+      // eslint-disable-next-line eqeqeq
+      if (this._operationElements[1] === '/' && this._operationElements[2] == 0) {
         this._operationElements = [0]
-        this.throwError(ErrorMsg.DIV_0)
+        this.throwError(opt.ErrorMsg.DIV_0)
         return true
       }
       return false
     }
 
     // Avaliar se trata-se de repetição da última operação
-    if (OP_TRIGGERS.indexOf(this._lastButtonPressed) > -1 && operation == '=') {
+    if (opt.OP_TRIGGERS.indexOf(this._lastButtonPressed) > -1 && operation === '=') {
       this.pushOperation(this._lastOperator)
       this.pushOperation(this._lastOperated)
     }
 
     // Declarar variáveis locais
-    let result, len = this._operationElements.length
+    const len = this._operationElements.length
+    let result
     switch (len) {
 
-      // Em caso de um único elemento...
       case 1:
-
-        // Para '%' (porcento), retornar a centésima parte do valor
-        if (operation == '%') {
+        if (operation === '%') {
           result = this._operationElements[0] / 100
-
-        // Para '=' (igual), retornar o próprio valor
-        } else if (operation == '=') {
+        } else if (operation === '=') {
           result = this._operationElements[0]
         }
         break
-      
-      // Em caso de dois elementos...
+
       case 2:
-
-        // Repetir o primeiro valor para realizar a operação completa
         this._operationElements.push(this._operationElements[0])
-      
-      // Em caso de três elementos...
-      case 3:
+        // falls through
 
-        // Verificar divisão por 0 (zero)
+      case 3:
         if (isDividingByZero()) {
           return
         }
 
-        // Para '%' (porcento), avaliar o operador aritmético e realizar o cálculo pertinente
-        if (operation == '%') {
-          
-          // Se for adição ou subtração, realizar o acrécimo/decrécimo proporcional do primeiro valor
-          if (ADD_SUB.indexOf(this._operationElements[1]) > -1) {
+        if (operation === '%') {
+          if (opt.ADD_SUB.indexOf(this._operationElements[1]) > -1) {
             this._operationElements[2] = this._operationElements[0] * this._operationElements[2] / 100
-          
-          // Se for multiplicação ou divisão, dividir segundo número por cem
           } else {
             this._operationElements[2] = this._operationElements[2] / 100
           }
         }
 
         // Salvar últimas operações
-        this._lastOperator = this._operationElements[1] 
+        this._lastOperator = this._operationElements[1]
         this._lastOperated = this._operationElements[2]
 
         // Fazer o parse dos dos elementos da operação e executar cálculo
         result = eval(this._operationElements.join(''))
     }
-    
+
     // Salvar resultado como elemento de operações
     this._operationElements = [result]
   }
@@ -353,7 +343,7 @@ class Calculator {
   throwError(errorMessage = undefined) {
 
     // Verificar se houve parâmetro informado
-    errorMessage = errorMessage || ErrorMsg.GENERAL
+    errorMessage = errorMessage || opt.ErrorMsg.GENERAL
 
     // Exibi mensagem de rro na tela
     this.refreshDisplay(errorMessage)
@@ -367,10 +357,10 @@ class Calculator {
       // Substituir operador aritmético se input for também um operador aritmético
       if (this.isOperator(value)) {
         this.lastOperationElement = value
-      
+
       // Inserir '0.' como novo elemento da operação se o input for o separador decimal
-      } else if (value == DECIMAL_SEP) {
-        this.pushOperation('0' + DECIMAL_SEP)
+      } else if (value === opt.DECIMAL_SEP) {
+        this.pushOperation('0' + opt.DECIMAL_SEP)
 
       // Adicionar novo elemento à operação como número, se um número foi digitado
       } else if (!isNaN(value)) {
@@ -383,13 +373,13 @@ class Calculator {
       // Adicionar input operador como novo elemento da operação
       if (this.isOperator(value)) {
         this.pushOperation(value)
-      
+
       // Reiniciar operação se o último valor é resultado de outra operação
-      } else if (this._lastButtonPressed == '=' && !isNaN(value)) {
+      } else if (this._lastButtonPressed === '=' && !isNaN(value)) {
 
         // Inserir '0.' como novo elemento da operação se o input for o separador decimal
-        if (value == DECIMAL_SEP) {
-          this._operationElements = ['0' + DECIMAL_SEP]
+        if (value === opt.DECIMAL_SEP) {
+          this._operationElements = ['0' + opt.DECIMAL_SEP]
 
         // Adicionar novo elemento à operação como número, se um número foi digitado
         } else if (!isNaN(value)) {
@@ -397,13 +387,14 @@ class Calculator {
         }
 
       // Concatenar input separador decimal se ainda não há separadores no valor atual
-      } else if (value == DECIMAL_SEP && !this.hasDecimals(this.lastOperationElement)) {
+      } else if (value === opt.DECIMAL_SEP && !this.hasDecimals(this.lastOperationElement)) {
         this.lastOperationElement += value
 
       // Concatenar input numérico ao valor atual
       } else if (!isNaN(value)) {
 
         // Se o input já tem valores decimais, simplesmente concatenar
+        // eslint-disable-next-line eqeqeq
         if (value == 0 && this.hasDecimals(this.lastOperationElement)) {
           this.lastOperationElement += value
 
@@ -418,13 +409,13 @@ class Calculator {
   isOperator(value) {
 
     // Avaliar se o parâmetro é um operador aritmético
-    return (OP_SYMBOLS.indexOf(value) > -1)
+    return (opt.OP_SYMBOLS.indexOf(value) > -1)
   }
 
   pushOperation(value) {
 
     // Dr já há 3 elementos na operação, calculá-la antes
-    if (this._operationElements.length == 3) {
+    if (this._operationElements.length === 3) {
       this.calculate('=')
     }
 
@@ -466,7 +457,7 @@ class Calculator {
   }
 
   set displayTime(time) {
-    
+
     // ColocarPosicionar hora em elemento HTML
     this._time.innerHTML = time
   }
