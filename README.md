@@ -4,8 +4,8 @@
 - **JavaScript developed by:** [Julio L. Muller](https://github.com/juliolmuller)
 - **HTML & CSS delivered by:** [Hcode Treinamentos](https://www.hcode.com.br)
 - **Released on:** Jan 17, 2019
-- **Updated on:** Mar 14, 2020
-- **Latest version:** 1.1.4
+- **Updated on:** Mar 15, 2020
+- **Latest version:** 1.1.5
 - **License:** MIT
 
 ## Overview
@@ -34,12 +34,3 @@ Take a look at this application running through [this link](https://juliolmuller
   - `Backspace` to CE (clear current entry)
   - `Escape` to AC (clear all operation)
 - Copy (`Ctrl+C`) & Paste (`Ctrl+V`) support;
-
-## Notes
-
-The HTML file ***index.html***, in the **app** folder, is set up to work with the minified transpiled files. Therefore, if you want to work with the development files, comment the *.min* files in the linked style sheets (tags `link`) and imported JavaScript (tags `script`), and uncomment those that are disabled.
-
-The figures below show how you are going to find the HTML file:
-
-![Styles Links](./css-dev-prod.jpg)
-![Scripts Imports](./js-dev-prod.jpg)
