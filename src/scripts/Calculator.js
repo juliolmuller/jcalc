@@ -36,9 +36,7 @@ export default class Calculator {
     self.refreshDisplay()
 
     // Executar 'refresh' do relógio
-    setInterval(function() {
-      self.refreshDateTime()
-    }, 1000)
+    setInterval(() => self.refreshDateTime(), 1000)
 
     // Configurar eventos de clique e teclado
     self.initAudioEvent()
@@ -53,13 +51,13 @@ export default class Calculator {
     this.displayDate = this.currentDate.toLocaleDateString(opt.LOCALE, { day: '2-digit', month: 'long', year: 'numeric' })
   }
 
-  refreshDisplay(value = undefined) {
+  refreshDisplay(value) {
 
     // Validar se foi passado parâmetro
     value = value || this.lastNumber.toString()
 
     // Tratar valor se ele for numérico
-    if (!isNaN(value)) {
+    if (!Number.isNaN(value)) {
 
       // Converter valor em 'string'
       value = value.toString()
@@ -77,7 +75,7 @@ export default class Calculator {
         return
 
       // Arredondar casas decimais para caber na tela
-      } else if (decimalLen >= 0) {
+      } if (decimalLen >= 0) {
 
         value = parseFloat(parseFloat(value).toFixed(decimalLen))
       }
@@ -94,11 +92,12 @@ export default class Calculator {
 
     // Verificar se o valor é numérico e ajustar separador decimal
     if (!this.hasDecimals(value)) {
-      value = value + opt.DECIMAL_SEP
+      value += opt.DECIMAL_SEP
     }
     return value
   }
 
+  // eslint-disable-next-line class-methods-use-this
   hasDecimals(string) {
 
     // Contar o número de separadores decimais do parâmetro
@@ -112,7 +111,7 @@ export default class Calculator {
 
     // Criar evento para ligar e desligar o som das teclas
     const img = document.getElementById('toggle-audio')
-    img.addEventListener('click', event => {
+    img.addEventListener('click', () => {
       self._withAudio = !self._withAudio
 
       // Alternar ícone de som
@@ -134,13 +133,13 @@ export default class Calculator {
     const buttons = document.querySelectorAll('#buttons > g, #parts > g')
 
     // Iterar sobre tipos de evento de clique do mouse
-    ;['click', 'drag'].forEach(event => {
+    ;['click', 'drag'].forEach((event) => {
 
       // Iterar sobre os elementos, configurando o evento
-      buttons.forEach(button => {
+      buttons.forEach((button) => {
 
         // Definir evento para cliques simples e longos
-        button.addEventListener(event, function() {
+        button.addEventListener(event, () => {
 
           // Retornar valor de elemento clicado
           const textButton = button.className.baseVal.replace('btn-', '')
@@ -150,13 +149,13 @@ export default class Calculator {
     })
 
     // Iterar sobre tipos de evento de ponteiro do mouse
-    ;['mouseover', 'mouseup', 'mousedown'].forEach(event => {
+    ;['mouseover', 'mouseup', 'mousedown'].forEach((event) => {
 
       // Iterar sobre os elementos, configurando o evento
-      buttons.forEach(button => {
+      buttons.forEach((button) => {
 
         // Exibir ponteiro de 'clicável' quando mouse passar sobre botões
-        button.addEventListener(event, function() {
+        button.addEventListener(event, () => {
           button.style.cursor = 'pointer'
         })
       })
@@ -169,7 +168,7 @@ export default class Calculator {
     const self = this
 
     // Definir evento de teclas pressionada do teclado
-    document.addEventListener('keyup', event => {
+    document.addEventListener('keyup', (event) => {
 
       // Chamar botão equivalente (ver constante 'KEYS_MAP')
       const key = event.key.toLowerCase()
@@ -182,16 +181,18 @@ export default class Calculator {
     })
 
     // Definir evento de colagem de texto da Área de Transferência
-    document.addEventListener('paste', event => {
+    document.addEventListener('paste', (event) => {
       const content = event.clipboardData.getData('Text')
 
       // Validar texto colado como número
-      if (isNaN(content)) {
+      if (Number.isNaN(content)) {
+        // eslint-disable-next-line no-alert
         alert(`Você está tentando colar conteúdo que não é numérico:\n"${content}"`)
       } else {
         self.playAudio()
         self.captureOperation(content)
         self.refreshDisplay()
+        // eslint-disable-next-line no-console
         console.log('Conteúdo colado com sucesso!')
       }
     })
@@ -307,13 +308,13 @@ export default class Calculator {
         if (operation === '%') {
           result = this._operationElements[0] / 100
         } else if (operation === '=') {
-          result = this._operationElements[0]
+          [result] = this._operationElements
         }
         break
 
       case 2:
         this._operationElements.push(this._operationElements[0])
-        // falls through
+        /* falls through */
 
       case 3:
         if (isDividingByZero()) {
@@ -322,18 +323,22 @@ export default class Calculator {
 
         if (operation === '%') {
           if (opt.ADD_SUB.indexOf(this._operationElements[1]) > -1) {
-            this._operationElements[2] = this._operationElements[0] * this._operationElements[2] / 100
+            this._operationElements[2] = (this._operationElements[0] * this._operationElements[2]) / 100
           } else {
-            this._operationElements[2] = this._operationElements[2] / 100
+            this._operationElements[2] /= 100
           }
         }
 
         // Salvar últimas operações
-        this._lastOperator = this._operationElements[1]
-        this._lastOperated = this._operationElements[2]
+        [, this._lastOperator, this._lastOperated] = this._operationElements
 
         // Fazer o parse dos dos elementos da operação e executar cálculo
+        // eslint-disable-next-line no-eval
         result = eval(this._operationElements.join(''))
+        break
+
+      default:
+        /* do nothing */
     }
 
     // Salvar resultado como elemento de operações
@@ -360,30 +365,30 @@ export default class Calculator {
 
       // Inserir '0.' como novo elemento da operação se o input for o separador decimal
       } else if (value === opt.DECIMAL_SEP) {
-        this.pushOperation('0' + opt.DECIMAL_SEP)
+        this.pushOperation(`0${opt.DECIMAL_SEP}`)
 
       // Adicionar novo elemento à operação como número, se um número foi digitado
-      } else if (!isNaN(value)) {
-        this.pushOperation(parseInt(value))
+      } else if (!Number.isNaN(value)) {
+        this.pushOperation(parseInt(value, 10))
       }
 
     // Se o último elemento da operação for um 'number'
-    } else if (!isNaN(this.lastOperationElement)) {
+    } else if (!Number.isNaN(this.lastOperationElement)) {
 
       // Adicionar input operador como novo elemento da operação
       if (this.isOperator(value)) {
         this.pushOperation(value)
 
       // Reiniciar operação se o último valor é resultado de outra operação
-      } else if (this._lastButtonPressed === '=' && !isNaN(value)) {
+      } else if (this._lastButtonPressed === '=' && !Number.isNaN(value)) {
 
         // Inserir '0.' como novo elemento da operação se o input for o separador decimal
         if (value === opt.DECIMAL_SEP) {
-          this._operationElements = ['0' + opt.DECIMAL_SEP]
+          this._operationElements = [`0${opt.DECIMAL_SEP}`]
 
         // Adicionar novo elemento à operação como número, se um número foi digitado
-        } else if (!isNaN(value)) {
-          this._operationElements = [parseInt(value)]
+        } else if (!Number.isNaN(value)) {
+          this._operationElements = [parseInt(value, 10)]
         }
 
       // Concatenar input separador decimal se ainda não há separadores no valor atual
@@ -391,7 +396,7 @@ export default class Calculator {
         this.lastOperationElement += value
 
       // Concatenar input numérico ao valor atual
-      } else if (!isNaN(value)) {
+      } else if (!Number.isNaN(value)) {
 
         // Se o input já tem valores decimais, simplesmente concatenar
         // eslint-disable-next-line eqeqeq
@@ -406,6 +411,7 @@ export default class Calculator {
     }
   }
 
+  // eslint-disable-next-line class-methods-use-this
   isOperator(value) {
 
     // Avaliar se o parâmetro é um operador aritmético
@@ -469,6 +475,7 @@ export default class Calculator {
   }
 
   // Retornar objeto 'Date' com a data e hora atuais
+  // eslint-disable-next-line class-methods-use-this
   get currentDate() {
     return new Date()
   }
