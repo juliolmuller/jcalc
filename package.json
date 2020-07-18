@@ -1,7 +1,7 @@
 {
   "name": "jcalc",
   "author": "Julio L. Muller",
-  "version": "1.1.6",
+  "version": "1.1.7",
   "description": "Provides development tools to minify and uglify codes and transpile JavaScript to mantain compatibility with old browsers.",
   "license": "MIT",
   "keywords": [
@@ -20,7 +20,7 @@
   },
   "devDependencies": {
     "@lacussoft/eslint-config-standard": "^1.0.3",
-    "eslint": "^7.3.1",
+    "eslint": "^7.4.0",
     "parcel-bundler": "^1.12.4"
   },
   "eslintConfig": {
