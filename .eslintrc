@@ -14,5 +14,9 @@
     "ecmaVersion": 2018,
     "sourceType": "module"
   },
-  "rules": {}
+  "rules": {
+    "class-methods-use-this": "off",
+    "no-magic-numbers": ["error", { "ignore": [-1, 0, 1, 2, 3, 100, 1000] }],
+    "no-param-reassign": "off"
+  }
 }
