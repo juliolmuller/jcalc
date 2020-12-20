@@ -1,6 +1,3 @@
-/*
- * Definir constantes globais
- */
 export default {
   LOCALE: 'PT-BR',
   DECIMAL_SEP: '.',

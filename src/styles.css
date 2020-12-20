@@ -1,7 +1,7 @@
 
 @font-face {
   font-family: 'Digital-7';
-  src: url('./../assets/fonts/digital-7.ttf');
+  src: url('./assets/fonts/digital-7.ttf');
 }
 
 button, hr, input {
