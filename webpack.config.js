@@ -41,7 +41,6 @@ module.exports = {
             loader: 'file-loader',
             options: {
               name: 'assets/images/[name].[hash:6].[ext]',
-              publicPath: '../',
             },
           },
         ],
@@ -64,8 +63,7 @@ module.exports = {
           {
             loader: 'file-loader',
             options: {
-              name: 'assets/audio/[name].[hash:6].[ext]',
-              publicPath: '../',
+              name: 'assets/audio/assets/audio/[name].[hash:6].[ext]',
             },
           },
         ],
