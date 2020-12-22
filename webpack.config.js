@@ -63,7 +63,7 @@ module.exports = {
           {
             loader: 'file-loader',
             options: {
-              name: 'assets/audio/assets/audio/[name].[hash:6].[ext]',
+              name: 'assets/audio/[name].[hash:6].[ext]',
             },
           },
         ],
