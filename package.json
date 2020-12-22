@@ -1,6 +1,6 @@
 {
   "name": "jcalc",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "private": true,
   "license": "MIT",
   "author": "Julio L. Muller",
@@ -15,7 +15,7 @@
   "devDependencies": {
     "@babel/core": "^7.12.10",
     "@babel/preset-env": "^7.12.11",
-    "@lacussoft/eslint-config": "^1.0.0",
+    "@lacussoft/eslint-config": "^1.0.1",
     "babel-loader": "^8.2.2",
     "cross-env": "^7.0.3",
     "css-loader": "^5.0.1",
