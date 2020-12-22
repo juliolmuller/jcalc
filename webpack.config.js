@@ -11,6 +11,7 @@ module.exports = {
   target: ['web', 'es5'],
   entry: './src/main.js',
   output: {
+    publicPath: './',
     path: path.join(__dirname, buildDir),
     filename: 'scripts/bundle.js',
   },
