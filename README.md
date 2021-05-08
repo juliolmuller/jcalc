@@ -48,7 +48,7 @@ Make sure to have **Node.js 10+** installed in your machine and its **npm** avai
 
 ```bash
 $ npm install     # Download dependencies
-$ npm start       # Run development server
+$ npm run serve   # Run development server
 $ npm run build   # Build files for production
 ```
 

@@ -1,11 +1,11 @@
 {
   "name": "jcalc",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "private": true,
   "license": "MIT",
   "author": "Julio L. Muller",
   "scripts": {
-    "start": "cross-env NODE_ENV=development webpack serve",
+    "serve": "cross-env NODE_ENV=development webpack serve",
     "build": "rm -rf docs/ && cross-env NODE_ENV=production webpack && cp -r public/* docs/",
     "lint": "eslint --fix src/**/*.js"
   },
