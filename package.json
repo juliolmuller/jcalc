@@ -10,18 +10,19 @@
     "lint": "eslint src/  --fix"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.10",
-    "@babel/preset-env": "^7.12.11",
-    "@lacussoft/eslint-config": "^1.0.1",
+    "@babel/core": "^7.14.0",
+    "@babel/preset-env": "^7.14.1",
     "babel-loader": "^8.2.2",
+    "core-js": "^3.12.0",
     "cross-env": "^7.0.3",
-    "css-loader": "^5.0.1",
-    "eslint": "^7.17.0",
+    "css-loader": "^5.2.4",
+    "css-minimizer-webpack-plugin": "^2.0.0",
+    "eslint": "^7.25.0",
+    "eslint-config-lacussoft": "^1.0.0",
     "file-loader": "^6.2.0",
-    "mini-css-extract-plugin": "^1.3.3",
-    "optimize-css-assets-webpack-plugin": "^5.0.4",
-    "webpack": "^5.12.3",
-    "webpack-cli": "^4.3.1",
-    "webpack-dev-server": "^3.11.1"
+    "mini-css-extract-plugin": "^1.6.0",
+    "webpack": "^5.36.2",
+    "webpack-cli": "^4.7.0",
+    "webpack-dev-server": "^3.11.2"
   }
 }
