@@ -6,11 +6,8 @@
   "author": "Julio L. Muller",
   "scripts": {
     "serve": "cross-env NODE_ENV=development webpack serve",
-    "build": "rm -rf docs/ && cross-env NODE_ENV=production webpack && cp -r public/* docs/",
-    "lint": "eslint --fix src/**/*.js"
-  },
-  "dependencies": {
-    "core-js": "^3.8.2"
+    "build": "rm -rf dist/ && cross-env NODE_ENV=production webpack && cp -r public/* dist/",
+    "lint": "eslint src/  --fix"
   },
   "devDependencies": {
     "@babel/core": "^7.12.10",
