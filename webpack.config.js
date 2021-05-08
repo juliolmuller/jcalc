@@ -1,17 +1,17 @@
 /* eslint-env node */
 const path = require('path')
 const MiniCssExtract = require('mini-css-extract-plugin')
-const OptimizeCssAssets = require('optimize-css-assets-webpack-plugin')
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
 
 const buildMode = process.env.NODE_ENV
-const buildDir = buildMode === 'production' ? 'docs' : 'public'
+const buildDir = buildMode === 'production' ? 'dist' : 'public'
 
 module.exports = {
   mode: buildMode,
   target: ['web', 'es5'],
   entry: './src/main.js',
   output: {
-    publicPath: './',
+    publicPath: '/',
     path: path.join(__dirname, buildDir),
     filename: 'scripts/bundle.js',
   },
@@ -70,10 +70,15 @@ module.exports = {
       },
     ],
   },
+  optimization: {
+    minimize: true,
+    minimizer: [
+      new CssMinimizerPlugin(),
+    ],
+  },
   plugins: [
     new MiniCssExtract({
       filename: 'styles/bundle.css',
     }),
-    new OptimizeCssAssets({}),
   ],
 }
