@@ -21,7 +21,7 @@
   <img src="https://img.shields.io/github/license/juliolmuller/jcalc?labelColor=000000&color=EB673F" alt="Project License" />
 </p>
 
-![Application snapshot](./src/assets/images/app-overview.jpg)
+![Application snapshot](./.github/app-overview.jpg)
 
 Frontend web application developed knowledge on JavaScript on how to interact with the DOM and with events based on ES6 class syntax (and no frameworks). This project was proposed and developed in [Hcode's Udemy course](https://www.udemy.com/course/javascript-curso-completo/), an awesome one - :smiley: highly recommended!
 
