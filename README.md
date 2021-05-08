@@ -25,6 +25,8 @@
 
 Frontend web application developed knowledge on JavaScript on how to interact with the DOM and with events based on ES6 class syntax (and no frameworks). This project was proposed and developed in [Hcode's Udemy course](https://www.udemy.com/course/javascript-curso-completo/), an awesome one - :smiley: highly recommended!
 
+[Check out the application running!](https://jcalc.vercel.app/)
+
 ## :trophy: Lessons Learned
 
 - JavaScript `class` syntax;
