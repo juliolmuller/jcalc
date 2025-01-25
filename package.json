@@ -1,13 +1,13 @@
 {
   "name": "jcalc",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "private": true,
   "license": "MIT",
   "author": "Julio L. Muller",
+  "homepage": "https://jcalc.vercel.app/",
   "scripts": {
-    "serve": "cross-env NODE_ENV=development webpack serve",
-    "build": "rm -rf dist/ && cross-env NODE_ENV=production webpack && cp -r public/* dist/",
-    "lint": "eslint src/  --fix"
+    "dev": "cross-env NODE_ENV=development webpack serve",
+    "build": "rm -rf dist/ && cross-env NODE_ENV=production webpack && cp -r public/* dist/"
   },
   "devDependencies": {
     "@babel/core": "^7.14.0",
@@ -17,8 +17,6 @@
     "cross-env": "^7.0.3",
     "css-loader": "^5.2.4",
     "css-minimizer-webpack-plugin": "^2.0.0",
-    "eslint": "^7.25.0",
-    "eslint-config-lacussoft": "^1.0.0",
     "file-loader": "^6.2.0",
     "mini-css-extract-plugin": "^1.6.0",
     "webpack": "^5.36.2",
