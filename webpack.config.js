@@ -16,9 +16,10 @@ module.exports = {
     filename: 'scripts/bundle.js',
   },
   devServer: {
-    contentBase: path.join(__dirname, 'public'),
+    static: {
+      directory: path.join(__dirname, 'public'),
+    },
     compress: true,
-    overlay: true,
     port: 8080,
     open: true,
     hot: true,
@@ -52,7 +53,6 @@ module.exports = {
             loader: 'file-loader',
             options: {
               name: 'assets/fonts/[name].[hash:6].[ext]',
-              publicPath: '../',
             },
           },
         ],
